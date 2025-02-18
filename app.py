@@ -5,7 +5,7 @@ def main():
     page_home = st.Page("src/pages/home.py", title="Home", icon=":material/house:")
     page_cw_rough_plots = st.Page(
         "src/pages/cosmicwatch/rough_plots.py",
-        title="簡単なグラフ作成",
+        title="かんたんグラフ作成",
         icon=":material/insert_chart_outlined:",
     )
     page_cw_change_date = st.Page(
