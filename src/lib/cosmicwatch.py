@@ -31,6 +31,10 @@ class CosmicWatchAnalysis:
                 "pres",
             ],
         )
+        # numeric columns
+        df = df.apply(pd.to_numeric, errors="ignore")
+        df["date"] = df["date"].apply(pd.to_datetime, format="%Y-%m-%d-%H-%M-%S.%f")
+
         return df
 
     @staticmethod

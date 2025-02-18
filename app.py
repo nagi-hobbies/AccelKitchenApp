@@ -3,6 +3,11 @@ import streamlit as st
 
 def main():
     page_home = st.Page("src/pages/home.py", title="Home", icon=":material/house:")
+    page_cw_rough_plots = st.Page(
+        "src/pages/cosmicwatch/rough_plots.py",
+        title="簡単なグラフ作成",
+        icon=":material/insert_chart_outlined:",
+    )
     page_cw_change_date = st.Page(
         "src/pages/cosmicwatch/change_date.py",
         title="日付の変更",
@@ -11,7 +16,7 @@ def main():
     pg = st.navigation(
         {
             "": [page_home],
-            "CosmicWatch": [page_cw_change_date],
+            "CosmicWatch": [page_cw_rough_plots, page_cw_change_date],
         }
     )
 
