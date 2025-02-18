@@ -6,8 +6,18 @@ This is a simple Streamlit application that demonstrates how to create a web app
 
 ```
 my-streamlit-app
+├── .streamlit
+│   └── config.toml
 ├── src
-│   └── app.py
+│   ├── lib
+│   │   ├── __pycache__
+│   │   │   └── cosmicwatch.cpython-312.pyc
+│   │   └── cosmicwatch.py
+│   ├── pages
+│   │   ├── cosmicwatch
+│   │   │   └── change_date.py
+│   │   └── home.py
+├── app.py
 ├── requirements.txt
 └── README.md
 ```
@@ -22,7 +32,7 @@ pip install -r requirements.txt
 
 ## Running the Application
 
-To start the Streamlit app, navigate to the `src` directory and run the following command:
+To start the Streamlit app, navigate to the root directory and run the following command:
 
 ```
 streamlit run app.py
