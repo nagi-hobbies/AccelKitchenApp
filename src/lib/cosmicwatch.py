@@ -1,5 +1,6 @@
 import datetime
 
+import numpy as np
 import pandas as pd
 import streamlit as st
 
@@ -16,10 +17,10 @@ class CosmicWatchAnalysis:
         Returns:
             pd.DataFrame: 整形されたデータフレーム
         """
-        df = pd.read_csv(
-            file,
-            sep="\t",
-            names=[
+        data = np.loadtxt(file, delimiter="\t", dtype=str)
+        df = pd.DataFrame(
+            data,
+            columns=[
                 "event",
                 "date",
                 "totaltime",
@@ -27,8 +28,6 @@ class CosmicWatchAnalysis:
                 "sipm",
                 "deadtime",
                 "temp",
-                "hum",
-                "pres",
             ],
         )
         # numeric columns

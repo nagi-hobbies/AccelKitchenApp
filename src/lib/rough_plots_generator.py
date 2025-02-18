@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib_fontja
+import numpy as np
 import pandas as pd
 import seaborn as sns
 
@@ -40,10 +41,12 @@ class RoughPlotsGenerator:
             plt.figure: ヒストグラム
         """
         fig = plt.figure(figsize=figsize)
-        sns.histplot(df[column], bins=bins, binrange=x_lim)
+        data = df[column].dropna()
+        counts, bin_edges = np.histogram(data, bins=bins, range=x_lim)
+        # plt.hist(bin_edges[:-1], bin_edges, weights=counts)
+        plt.bar(bin_edges[:-1], counts, width=np.diff(bin_edges), align="edge")
         plt.title(title)
         plt.xlabel(x_label)
         plt.ylabel(y_label)
-        # plt.xlim(x_lim)
         plt.ylim(y_lim)
         return fig

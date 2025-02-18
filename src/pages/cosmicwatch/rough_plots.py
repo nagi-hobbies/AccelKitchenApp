@@ -13,7 +13,7 @@ file = st.file_uploader("グラフを作成するファイルをアップロー�
 
 
 if file is not None:
-    with st.spinner("ファイルを読み込んでいます..."):
+    with st.spinner("ファイルを読み込んでいます...(数分かかる場合があります)"):
         df = cw.CosmicWatchAnalysis.read_file(file)
         rpg = rpg.RoughPlotsGenerator(df)
 
