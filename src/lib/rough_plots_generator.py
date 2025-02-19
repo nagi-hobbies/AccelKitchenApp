@@ -23,6 +23,7 @@ class RoughPlotsGenerator:
 
     def plot_histgram(
         self,
+        cw_or_rp: str,
         df: pd.DataFrame,
         column: str,
         figsize: tuple = (5, 4),
@@ -63,16 +64,16 @@ class RoughPlotsGenerator:
         plt.ylim(y_lim)
 
         code = (
-            f"df = CosmicWatchAnalysis.read_file('データファイルのパス')\n"
+            f"df = {'CosmicWatchAnalysis' if cw_or_rp=="cw" else "RedpitayaAnalysis"}.read_file('データファイルのパス') # データの読み込み\n"
             "\n"
             f"fig = plt.figure(figsize={figsize})\n"
             "\n"
             f"plt.hist(df['{column}'], bins={bins}, range={x_lim})\n"
             "\n"
-            f"plt.title('{title}')\n"
-            f"plt.xlabel('{x_label}')\n"
-            f"plt.ylabel('{y_label}')\n"
-            f"plt.ylim({y_lim})\n"
+            f"plt.title('{title}') # タイトル\n"
+            f"plt.xlabel('{x_label}') # x軸のラベル\n"
+            f"plt.ylabel('{y_label}') # y軸のラベル\n"
+            f"plt.ylim({y_lim}) # y軸の範囲\n"
             "plt.show()"
         )
         return fig, code

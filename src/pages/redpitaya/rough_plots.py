@@ -119,6 +119,7 @@ if state.get("df") is not None:
         st.write("グラフを書くためのpythonコードも下にあります")
 
         fig, code = rpg.plot_histgram(
+            "rp",
             df,
             column,
             figsize=(fig_width, fig_height),
@@ -132,7 +133,7 @@ if state.get("df") is not None:
         st.pyplot(fig, use_container_width=False)
 
         with st.expander("下のコードより前に一度だけ実行が必要なコード"):
-            with open("src/assets/texts/firstcell.txt", "r", encoding="utf-8") as f:
+            with open("src/assets/texts/rp_firstcell.txt", "r", encoding="utf-8") as f:
                 first_cell_code = f.read()
             st.write("マウスホバー時に右上に表示されるコピーアイコンでコピーできます")
             st.code(first_cell_code)

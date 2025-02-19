@@ -9,6 +9,12 @@ def main():
         icon=":material/insert_chart_outlined:",
         url_path="cw_rough_plots",
     )
+    page_cw_rough_statistics = st.Page(
+        "src/pages/cosmicwatch/rough_statistics.py",
+        title="かんたん統計解析",
+        icon=":material/insert_chart_outlined:",
+        url_path="cw_rough_statistics",
+    )
     page_cw_change_date = st.Page(
         "src/pages/cosmicwatch/change_date.py",
         title="日付の変更",
@@ -24,7 +30,11 @@ def main():
     pg = st.navigation(
         {
             "": [page_home],
-            "CosmicWatch": [page_cw_rough_plots, page_cw_change_date],
+            "CosmicWatch": [
+                page_cw_rough_plots,
+                page_cw_rough_statistics,
+                page_cw_change_date,
+            ],
             "RedPitaya": [page_rp_rough_plots],
         }
     )
