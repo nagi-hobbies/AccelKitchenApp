@@ -116,6 +116,7 @@ if state.get("df") is not None:
 
         st.divider()
 
+        st.write("右クリックで画像を保存できます")
         st.write("グラフを書くためのpythonコードも下にあります")
 
         fig, code = rpg.plot_histgram(
