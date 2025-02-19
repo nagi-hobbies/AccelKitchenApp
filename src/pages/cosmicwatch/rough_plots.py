@@ -10,6 +10,8 @@ st.set_page_config(layout="wide")
 
 st.header("かんたんグラフ作成", divider=True)
 
+st.subheader("データの読み込み", divider=True)
+
 file = st.file_uploader(
     "グラフを作成するファイルをアップロード", type=["dat", "txt"], key="file_uploader"
 )
@@ -33,8 +35,13 @@ if state.get("df") is not None:
 
     st.divider()
 
+    st.subheader("グラフの設定(見た目の設定はサイドバーにあります)", divider=True)
+
     plot_type = st.selectbox(
-        "プロットの種類", ["ヒストグラム", "散布図"], key="plot_type"
+        "プロットの種類(現在はヒストグラムのみ)",
+        ["ヒストグラム", "散布図"],
+        key="plot_type",
+        disabled=True,
     )
 
     if plot_type == "ヒストグラム":
@@ -44,17 +51,28 @@ if state.get("df") is not None:
         cols_fig_size = st.columns(2)
 
         with st.sidebar:
+            st.subheader("見た目の設定")
+            title = st.text_input("グラフのタイトル", key="title")
+            x_label = st.text_input("x軸のラベル", value=column, key="x_label")
+            y_label = st.text_input("y軸のラベル", value="count", key="y_label")
+
             fig_width = st.slider(
                 "グラフの幅", min_value=1, max_value=10, value=5, key="fig_width"
             )
             fig_height = st.slider(
                 "グラフの高さ", min_value=1, max_value=10, value=4, key="fig_height"
             )
-
-            title = st.text_input("グラフのタイトル", key="title")
-            x_label = st.text_input("x軸のラベル", value=column, key="x_label")
-            y_label = st.text_input("y軸のラベル", value="count", key="y_label")
-
+            fontsize = st.slider(
+                "フォントサイズ", min_value=1, max_value=3, value=2, key="fontsize"
+            )
+            sns_context = "notebook"
+            if fontsize == 1:
+                sns_context = "paper"
+            elif fontsize == 2:
+                sns_context = "notebook"
+            elif fontsize == 3:
+                sns_context = "talk"
+            rpg.change_context(sns_context)
         bins = st.slider("ビンの数", min_value=1, max_value=200, value=100, key="bins")
 
         cols_plot_config = st.columns(2, vertical_alignment="center", border=True)
@@ -98,7 +116,9 @@ if state.get("df") is not None:
 
         st.divider()
 
-        fig = rpg.plot_histgram(
+        st.write("グラフを書くためのpythonコードも下にあります")
+
+        fig, code = rpg.plot_histgram(
             df,
             column,
             figsize=(fig_width, fig_height),
@@ -110,3 +130,12 @@ if state.get("df") is not None:
             y_lim=y_lim,
         )
         st.pyplot(fig, use_container_width=False)
+
+        with st.expander("下のコードより前に一度だけ実行が必要なコード"):
+            with open("src/assets/texts/firstcell.txt", "r", encoding="utf-8") as f:
+                first_cell_code = f.read()
+            st.write("マウスホバー時に右上に表示されるコピーアイコンでコピーできます")
+            st.code(first_cell_code)
+        with st.expander("このグラフを作成するコード"):
+            st.write("マウスホバー時に右上に表示されるコピーアイコンでコピーできます")
+            st.code(code)

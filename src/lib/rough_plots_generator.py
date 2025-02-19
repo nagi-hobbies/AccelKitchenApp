@@ -11,6 +11,16 @@ class RoughPlotsGenerator:
         matplotlib_fontja.japanize()
         self.df = df
 
+    def change_context(self, context: str) -> None:
+        """
+        テーマを変更します
+
+        Args:
+            theme (str): テーマ
+        """
+        sns.set_theme(context=context)
+        matplotlib_fontja.japanize()
+
     def plot_histgram(
         self,
         df: pd.DataFrame,
@@ -39,7 +49,9 @@ class RoughPlotsGenerator:
 
         Returns:
             plt.figure: ヒストグラム
+            code: python
         """
+
         fig = plt.figure(figsize=figsize)
         data = df[column].dropna()
         counts, bin_edges = np.histogram(data, bins=bins, range=x_lim)
@@ -49,4 +61,18 @@ class RoughPlotsGenerator:
         plt.xlabel(x_label)
         plt.ylabel(y_label)
         plt.ylim(y_lim)
-        return fig
+
+        code = (
+            f"df = CosmicWatchAnalysis.read_file('データファイルのパス')\n"
+            "\n"
+            f"fig = plt.figure(figsize={figsize})\n"
+            "\n"
+            f"plt.hist(df['{column}'], bins={bins}, range={x_lim})\n"
+            "\n"
+            f"plt.title('{title}')\n"
+            f"plt.xlabel('{x_label}')\n"
+            f"plt.ylabel('{y_label}')\n"
+            f"plt.ylim({y_lim})\n"
+            "plt.show()"
+        )
+        return fig, code

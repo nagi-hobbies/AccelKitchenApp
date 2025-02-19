@@ -5,7 +5,7 @@ import streamlit as st
 
 import src.lib.cosmicwatch as cw
 
-st.header("CosmicWatch 日付の変更")
+st.header("CosmicWatch 日付の変更", divider=True)
 
 file = st.file_uploader("日付を変更するファイルをアップロード", type=["dat", "txt"])
 

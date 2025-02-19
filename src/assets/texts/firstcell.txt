@@ -1,0 +1,51 @@
+import os
+if os.name == 'posix':  # colab環境でのみ実行
+    !pip install matplotlib-fontja seaborn
+    import google.colab
+    google.colab.drive.mount('/content/drive')
+else:
+    pass
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+import matplotlib_fontja
+
+import lmfit as lm
+
+sns.set_theme()
+matplotlib_fontja.japanize()
+
+
+class CosmicWatchAnalysis:
+    @staticmethod
+    def read_file(file) -> pd.DataFrame:
+        """
+        ファイルを読み込み、データフレームに変換します。
+
+        Args:
+            file (io.BytesIO): 読み込むファイル
+
+        Returns:
+            pd.DataFrame: 整形されたデータフレーム
+        """
+        data = np.loadtxt(file, delimiter="\t", dtype=str)
+        df = pd.DataFrame(
+            data,
+            columns=[
+                "event",
+                "date",
+                "totaltime",
+                "adc",
+                "sipm",
+                "deadtime",
+                "temp",
+            ],
+        )
+        # numeric columns
+        df = df.apply(pd.to_numeric, errors="ignore")
+        df["date"] = df["date"].apply(pd.to_datetime, format="%Y-%m-%d-%H-%M-%S.%f")
+
+        return df
