@@ -30,19 +30,22 @@ if state.get("df") is not None:
     st.subheader("基本統計量", divider=True)
     st.write(df.describe())
 
-    st.subheader("adcでフィルターしたカウントレート", divider=True)
+    st.subheader("カウントレート", divider=True)
 
+    whether_filter = st.checkbox("adcでフィルターする")
     adc_min = st.number_input(
         "adcの最小値",
         min_value=0,
         max_value=1023,
         value=0,
+        disabled=not whether_filter,
     )
     adc_max = st.number_input(
         "adcの最大値",
         min_value=0,
         max_value=1023,
         value=1023,
+        disabled=not whether_filter,
     )
 
     filtered_df = df[(df["adc"] >= adc_min) & (df["adc"] <= adc_max)]
