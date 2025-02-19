@@ -34,12 +34,12 @@ if state.get("df") is not None:
             "| --- | --- |\n"
             "| count | データの個数 |\n"
             "| mean | 平均値 |\n"
-            "| std | 標準偏差 |\n"
             "| min | 最小値 |\n"
             "| 25% | 下位25%点 |\n"
             "| 50% | 中央値 |\n"
             "| 75% | 上位25%点 |\n"
             "| max | 最大値 |\n"
+            "| std | 標準偏差 |\n"
         )
 
     st.write(df.describe())
