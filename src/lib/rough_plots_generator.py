@@ -64,7 +64,7 @@ class RoughPlotsGenerator:
         plt.ylim(y_lim)
 
         code = (
-            f"df = {'CosmicWatchAnalysis' if cw_or_rp=="cw" else "RedpitayaAnalysis"}.read_file('データファイルのパス') # データの読み込み\n"
+            f"df = {'CosmicWatchAnalysis' if cw_or_rp=="cw" else "RedpitayaAnalysis"}.read_file('パスをコピー') # データの読み込み\n"
             "\n"
             f"fig = plt.figure(figsize={figsize})\n"
             "\n"
