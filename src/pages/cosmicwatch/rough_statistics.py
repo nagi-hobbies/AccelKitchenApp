@@ -28,6 +28,18 @@ if state.get("df") is not None:
     st.write(df)
 
     st.subheader("基本統計量", divider=True)
+    with st.expander("基本統計量の説明"):
+        st.write(
+            "count: データの個数\n"
+            "mean: 平均値\n"
+            "std: 標準偏差\n"
+            "min: 最小値\n"
+            "25%: 下位25%点\n"
+            "50%: 中央値\n"
+            "75%: 上位25%点\n"
+            "max: 最大値"
+        )
+
     st.write(df.describe())
 
     st.subheader("カウントレート", divider=True)
